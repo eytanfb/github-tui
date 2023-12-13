@@ -7,9 +7,9 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/skanehira/ght/config"
-	"github.com/skanehira/ght/github"
-	"github.com/skanehira/ght/ui"
+	"github.com/eytanfb/ght/config"
+	"github.com/eytanfb/ght/github"
+	"github.com/eytanfb/ght/ui"
 )
 
 type Repo struct {

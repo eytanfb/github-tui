@@ -3,6 +3,7 @@ package github
 import (
 	"context"
 
+	"github.com/charmbracelet/log"
 	"github.com/shurcooL/githubv4"
 	"golang.org/x/oauth2"
 )
@@ -49,7 +50,9 @@ func GetIssues(variables map[string]interface{}) (*Issues, error) {
 	var q struct {
 		Search Issues `graphql:"search(query: $query, type: ISSUE, first: $first, after: $cursor)"`
 	}
+	log.Info("variables: %+v", variables)
 	if err := client.Query(context.Background(), &q, variables); err != nil {
+		log.Error("err: %+v", err)
 		return nil, err
 	}
 
@@ -57,6 +60,8 @@ func GetIssues(variables map[string]interface{}) (*Issues, error) {
 		Nodes:    q.Search.Nodes,
 		PageInfo: q.Search.PageInfo,
 	}
+
+	log.Info("issues: %+v", issues)
 	return issues, nil
 }
 
